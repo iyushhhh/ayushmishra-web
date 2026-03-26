@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ayush Mishra – Oracle APEX Developer, SQL & PL/SQL Specialist. Building enterprise-grade database applications and interactive dashboards.">
+<meta name="keywords" content="Oracle APEX Developer, SQL Developer, PL/SQL Developer, Database Applications, Oracle APEX, APEX 24.2, PL/SQL, SQL, Web Developer India">
+<title>Ayush Mishra | Oracle APEX Developer & SQL Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --border: #1f2d45;
+    --accent: #e8a020;
+    --accent2: #c8441a;
+    --text: #e8edf5;
+    --muted: #7a8fa8;
+    --highlight: #f0b430;
+    --oracle-red: #c74634;
+    --oracle-blue: #1a6fa5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 5vw;
+    background: rgba(10, 14, 26, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--text); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: #0a0e1a !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--highlight) !important; color: #0a0e1a !important; }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 5vw 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232,160,32,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,160,32,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(199,70,52,0.12) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(26,111,165,0.1) 0%, transparent 70%);
+    bottom: 0; left: 10%;
+    pointer-events: none;
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 780px; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(232,160,32,0.1);
+    border: 1px solid rgba(232,160,32,0.3);
+    color: var(--accent);
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.6rem, 5.5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  h1 .line1 { display: block; color: var(--text); }
+  h1 .line2 {
+    display: block;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--oracle-red) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    line-height: 1.75;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-desc strong { color: var(--text); }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0e1a;
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { background: var(--highlight); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,160,32,0.3); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 6rem 5vw; position: relative; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px; height: 2px;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub { color: var(--muted); font-size: 1rem; max-width: 500px; margin-bottom: 3.5rem; }
+
+  /* ─── ABOUT ─── */
+  #about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 1rem; line-height: 1.8; }
+  .about-text p strong { color: var(--text); }
+
+  .about-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.2s;
+  }
+  .highlight-item:hover { border-color: var(--accent); }
+
+  .hi-icon {
+    width: 36px; height: 36px;
+    background: rgba(232,160,32,0.1);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .hi-title { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+  .hi-desc { font-size: 0.82rem; color: var(--muted); }
+
+  /* ─── SKILLS ─── */
+  #skills { background: var(--bg); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--oracle-red));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .skill-card:hover { border-color: rgba(232,160,32,0.3); transform: translateY(-3px); }
+  .skill-card:hover::before { opacity: 1; }
+
+  .skill-card.primary { border-color: rgba(232,160,32,0.2); }
+  .skill-card.primary::before { opacity: 1; }
+
+  .skill-cat {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .skill-cat.secondary-cat { color: var(--oracle-blue); }
+  .skill-card.secondary-card::before { background: var(--oracle-blue); }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    padding: 0.4rem 0.85rem;
+    border-radius: 100px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    background: rgba(232,160,32,0.08);
+    border: 1px solid rgba(232,160,32,0.2);
+    color: var(--text);
+    transition: all 0.2s;
+  }
+  .tag:hover { background: rgba(232,160,32,0.15); }
+
+  .tag.alt {
+    background: rgba(26,111,165,0.08);
+    border-color: rgba(26,111,165,0.2);
+  }
+
+  /* ─── PROJECTS ─── */
+  #projects { background: var(--surface); border-top: 1px solid var(--border); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.8rem;
+    margin-bottom: 4rem;
+  }
+
+  .project-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.25s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 0;
+    background: linear-gradient(0deg, rgba(232,160,32,0.04) 0%, transparent 100%);
+    transition: height 0.3s;
+  }
+
+  .project-card:hover { border-color: rgba(232,160,32,0.4); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+  .project-card:hover::after { height: 100%; }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .project-icon {
+    width: 44px; height: 44px;
+    background: rgba(199,70,52,0.12);
+    border: 1px solid rgba(199,70,52,0.25);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .project-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    background: rgba(199,70,52,0.12);
+    color: var(--oracle-red);
+    border: 1px solid rgba(199,70,52,0.25);
+  }
+
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    flex-grow: 1;
+    margin-bottom: 1.4rem;
+  }
+
+  .project-features {
+    list-style: none;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .project-features li {
+    font-size: 0.82rem;
+    color: var(--muted);
+    padding-left: 1.1rem;
+    position: relative;
+  }
+
+  .project-features li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .stack-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    background: var(--surface2);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    font-family: 'DM Sans', monospace;
+  }
+
+  .academic-section { margin-top: 1rem; }
+
+  .academic-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .academic-label::before, .academic-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .academic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .academic-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+  .academic-card:hover { opacity: 1; }
+
+  .academic-card .project-title { font-size: 1rem; }
+
+  /* ─── EXPERIENCE ─── */
+  #experience { background: var(--bg); }
+
+  .exp-timeline { max-width: 720px; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 130px;
+    top: 8px;
+    bottom: -3rem;
+    width: 1px;
+    background: var(--border);
+  }
+  .exp-item:last-child::before { display: none; }
+
+  .exp-date {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 500;
+    padding-top: 4px;
+    text-align: right;
+  }
+
+  .exp-dot {
+    position: absolute;
+    left: 125px;
+    top: 6px;
+    width: 11px; height: 11px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+  }
+
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+  .exp-company {
+    font-size: 0.875rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+  .exp-body { font-size: 0.875rem; color: var(--muted); line-height: 1.75; }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+  .exp-tag {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    background: rgba(232,160,32,0.08);
+    border: 1px solid rgba(232,160,32,0.2);
+    color: var(--accent);
+  }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--surface); border-top: 1px solid var(--border); }
+
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-info h2 { margin-bottom: 1rem; }
+  .contact-info p { color: var(--muted); margin-bottom: 2rem; font-size: 0.95rem; line-height: 1.8; }
+
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+    color: var(--text);
+  }
+  .contact-link:hover { border-color: var(--accent); transform: translateX(4px); }
+
+  .cl-icon {
+    width: 38px; height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .cl-text-main { font-weight: 600; font-size: 0.9rem; }
+  .cl-text-sub { font-size: 0.78rem; color: var(--muted); }
+
+  /* contact form */
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .form-group label { font-size: 0.8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .form-group input,
+  .form-group textarea {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--accent); }
+
+  .form-group textarea { min-height: 120px; }
+
+  .btn-submit {
+    background: linear-gradient(135deg, var(--accent), var(--oracle-red));
+    color: #fff;
+    border: none;
+    padding: 0.9rem 2rem;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(199,70,52,0.35); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 2rem 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  footer strong { color: var(--accent); }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ─── ATS HIDDEN KEYWORDS (screen readers / crawlers) ─── */
+  .ats-keywords {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+  }
+
+  /* ─── HAMBURGER ─── */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 22px; height: 2px; background: var(--text); display: block; transition: all 0.3s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .about-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .exp-item::before { display: none; }
+    .exp-dot { display: none; }
+    .exp-date { text-align: left; }
+    .hero-stats { gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: var(--surface);
+      padding: 1.5rem 5vw;
+      border-bottom: 1px solid var(--border);
+      gap: 1.2rem;
+      z-index: 99;
+    }
+    .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ATS Keywords (hidden) -->
+<span class="ats-keywords">Oracle APEX Developer, SQL Developer, PL/SQL Developer, Oracle APEX 24.2, Database Application Developer, Oracle Database, ORDS, Interactive Grid, Interactive Report, SQL, PL/SQL, Web Developer, Enterprise Application Developer</span>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">AM<span>.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Oracle APEX Developer · Path Infotech</div>
+    <h1>
+      <span class="line1">Ayush Mishra</span>
+      <span class="line2">Oracle APEX Developer<br>& SQL Specialist</span>
+    </h1>
+    <p class="hero-desc">
+      Computer Science Engineer with hands-on experience building <strong>data-driven enterprise applications</strong> using Oracle APEX, SQL, and PL/SQL. I turn complex database logic into clean, user-facing solutions.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-secondary">Contact Me</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">7+</div>
+        <div class="stat-label">Months at Oracle Partner Firm</div>
+      </div>
+      <div>
+        <div class="stat-num">3+</div>
+        <div class="stat-label">APEX Applications Built</div>
+      </div>
+      <div>
+        <div class="stat-num">SQL</div>
+        <div class="stat-label">HackerRank Intermediate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-label">About Me</div>
+    <h2>Building Data-Driven<br>Applications That Scale</h2>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I'm a <strong>Computer Science Engineering graduate</strong> currently working as an <strong>Oracle APEX Developer at Path Infotech</strong> — a certified Oracle Partner delivering enterprise IT and digital transformation solutions globally. My day-to-day involves designing and building production-grade web applications on Oracle Database, from complex PL/SQL business logic to interactive APEX UI components.</p>
+      <p>I work with <strong>Oracle APEX, SQL, and PL/SQL</strong> to deliver data-centric applications — including Employee Management Systems, Interactive Dashboards, and Data Management tools. Every application I build is designed with performance, maintainability, and user experience in mind.</p>
+      <p>Beyond Oracle technologies, I bring solid full-stack fundamentals: HTML, CSS, JavaScript for front-end polish, and Python for scripting and automation. I use <strong>SQL Developer and Git</strong> as my primary development tools.</p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-item">
+        <div class="hi-icon">🗃️</div>
+        <div>
+          <div class="hi-title">Oracle APEX Development</div>
+          <div class="hi-desc">Forms, Interactive Reports, Dashboards, Validations, Dynamic Actions</div>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="hi-icon">🔷</div>
+        <div>
+          <div class="hi-title">SQL & PL/SQL Engineering</div>
+          <div class="hi-desc">Stored procedures, triggers, cursors, complex queries, performance tuning</div>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="hi-icon">📊</div>
+        <div>
+          <div class="hi-title">Data-Driven Application Design</div>
+          <div class="hi-desc">Enterprise-grade apps with business logic encapsulated in the database layer</div>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="hi-icon">🎓</div>
+        <div>
+          <div class="hi-title">B.Tech — Computer Science Engineering</div>
+          <div class="hi-desc">Dr. Abdul Kalam Technical University, Lucknow · 2021–2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <div class="section-label">Technical Skills</div>
+    <h2>What I Work With</h2>
+    <p class="section-sub">Oracle and database technologies first — supplemented by full-stack and systems skills.</p>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="skill-card primary">
+      <div class="skill-cat">⭐ Core — Oracle Stack</div>
+      <div class="skill-tags">
+        <span class="tag">Oracle APEX</span>
+        <span class="tag">SQL</span>
+        <span class="tag">PL/SQL</span>
+        <span class="tag">Oracle Database</span>
+        <span class="tag">SQL Developer</span>
+        <span class="tag">ORDS</span>
+      </div>
+    </div>
+    <div class="skill-card primary">
+      <div class="skill-cat">⭐ APEX Components</div>
+      <div class="skill-tags">
+        <span class="tag">Interactive Reports</span>
+        <span class="tag">Interactive Grid</span>
+        <span class="tag">Forms & Validations</span>
+        <span class="tag">Dynamic Actions</span>
+        <span class="tag">Dashboards</span>
+        <span class="tag">Charts</span>
+        <span class="tag">Page Processes</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat secondary-cat">Web Technologies</div>
+      <div class="skill-tags">
+        <span class="tag alt">HTML5</span>
+        <span class="tag alt">CSS3</span>
+        <span class="tag alt">JavaScript</span>
+        <span class="tag alt">Node.js</span>
+        <span class="tag alt">REST APIs</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat secondary-cat">Languages & Tools</div>
+      <div class="skill-tags">
+        <span class="tag alt">Python</span>
+        <span class="tag alt">C++</span>
+        <span class="tag alt">Git</span>
+        <span class="tag alt">GitHub</span>
+        <span class="tag alt">MongoDB</span>
+        <span class="tag alt">MySQL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <div class="section-label">Projects</div>
+    <h2>Oracle APEX Applications</h2>
+    <p class="section-sub">Production-focused applications built on Oracle APEX with full PL/SQL back-end logic.</p>
+  </div>
+
+  <div class="projects-grid reveal">
+
+    <!-- Project 1 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon">👥</div>
+        <span class="project-badge">Oracle APEX</span>
+      </div>
+      <div class="project-title">Employee Management System</div>
+      <p class="project-desc">
+        A full-featured HR data management application built on Oracle APEX. Designed to handle employee records, department assignments, and organizational workflows — with business logic enforced entirely via PL/SQL stored procedures.
+      </p>
+      <ul class="project-features">
+        <li>CRUD operations with master-detail forms and inline validation</li>
+        <li>PL/SQL stored procedures for business logic enforcement</li>
+        <li>Interactive Reports with multi-column filtering and export</li>
+        <li>Role-based access control and page authorization</li>
+        <li>Audit trail implemented via database triggers</li>
+      </ul>
+      <div class="project-stack">
+        <span class="stack-tag">Oracle APEX</span>
+        <span class="stack-tag">PL/SQL</span>
+        <span class="stack-tag">SQL</span>
+        <span class="stack-tag">Oracle DB</span>
+        <span class="stack-tag">Dynamic Actions</span>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon">📊</div>
+        <span class="project-badge">Oracle APEX</span>
+      </div>
+      <div class="project-title">Interactive Analytics Dashboard</div>
+      <p class="project-desc">
+        A real-time reporting and analytics dashboard built in Oracle APEX, enabling decision-makers to visualize KPIs and trends from Oracle Database. Focused on performance — all aggregations handled in SQL to minimize application-layer processing.
+      </p>
+      <ul class="project-features">
+        <li>Multi-chart dashboard: bar, pie, line charts using APEX chart engine</li>
+        <li>Dynamic filters driving real-time data refresh via Dynamic Actions</li>
+        <li>SQL-layer aggregations for high-performance data retrieval</li>
+        <li>Interactive Grid with inline editing capabilities</li>
+        <li>Responsive layout optimized for desktop and tablet</li>
+      </ul>
+      <div class="project-stack">
+        <span class="stack-tag">Oracle APEX</span>
+        <span class="stack-tag">SQL</span>
+        <span class="stack-tag">PL/SQL</span>
+        <span class="stack-tag">APEX Charts</span>
+        <span class="stack-tag">Interactive Grid</span>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon">🗂️</div>
+        <span class="project-badge">Oracle APEX</span>
+      </div>
+      <div class="project-title">Data Management Application</div>
+      <p class="project-desc">
+        An enterprise data entry and management application built on Oracle APEX, designed to streamline data collection workflows with strong validation rules and structured reporting. Implemented end-to-end from schema design to APEX front-end.
+      </p>
+      <ul class="project-features">
+        <li>Multi-step form wizards with server-side and client-side validation</li>
+        <li>PL/SQL validation procedures and pre/post-processing page processes</li>
+        <li>Tabular form with bulk insert/update support</li>
+        <li>Export to CSV/Excel via native APEX Interactive Report features</li>
+        <li>Custom error handling and user notification framework</li>
+      </ul>
+      <div class="project-stack">
+        <span class="stack-tag">Oracle APEX</span>
+        <span class="stack-tag">PL/SQL</span>
+        <span class="stack-tag">SQL</span>
+        <span class="stack-tag">Forms & Validations</span>
+        <span class="stack-tag">Oracle DB</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Academic Projects -->
+  <div class="academic-section reveal">
+    <div class="academic-label">Academic Projects</div>
+    <div class="academic-grid">
+      <div class="academic-card">
+        <div class="project-header">
+          <div class="project-icon" style="background:rgba(26,111,165,0.1);border-color:rgba(26,111,165,0.2)">✋</div>
+        </div>
+        <div class="project-title">Air Canvas</div>
+        <p class="project-desc" style="font-size:0.85rem">Gesture-based drawing application using real-time hand tracking. Leveraged MediaPipe for fingertip detection and OpenCV for virtual canvas rendering — no physical contact required.</p>
+        <div class="project-stack" style="margin-top:0.8rem">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">OpenCV</span>
+          <span class="stack-tag">MediaPipe</span>
+          <span class="stack-tag">NumPy</span>
+        </div>
+      </div>
+      <div class="academic-card">
+        <div class="project-header">
+          <div class="project-icon" style="background:rgba(26,111,165,0.1);border-color:rgba(26,111,165,0.2)">🌤️</div>
+        </div>
+        <div class="project-title">Weather Forecast App</div>
+        <p class="project-desc" style="font-size:0.85rem">Responsive weather application consuming the OpenWeather REST API to display real-time temperature, humidity, wind speed, and location-based conditions with a clean UI.</p>
+        <div class="project-stack" style="margin-top:0.8rem">
+          <span class="stack-tag">HTML</span>
+          <span class="stack-tag">CSS</span>
+          <span class="stack-tag">JavaScript</span>
+          <span class="stack-tag">OpenWeather API</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <div class="section-label">Experience</div>
+    <h2>Professional Journey</h2>
+  </div>
+  <div class="exp-timeline reveal">
+
+    <div class="exp-item">
+      <div class="exp-date">Sep 2024 – Present</div>
+      <div class="exp-dot"></div>
+      <div>
+        <div class="exp-role">Oracle APEX Developer</div>
+        <div class="exp-company" style="display:flex;align-items:center;gap:0.5rem">
+          <a href="https://www.pathinfotech.com" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600;">Path Infotech Limited</a>
+          <span style="font-size:0.7rem;padding:0.15rem 0.5rem;background:rgba(199,70,52,0.12);border:1px solid rgba(199,70,52,0.3);border-radius:4px;color:var(--oracle-red);font-weight:700;letter-spacing:0.05em">Oracle Partner</span>
+        </div>
+        <div class="exp-body">
+          Working as an Oracle APEX Developer at Path Infotech — a globally recognized Oracle APAC, OCI, and Oracle Build certified partner. Involved in end-to-end development of enterprise APEX applications: requirement analysis, schema design, PL/SQL back-end logic, APEX UI build, testing, and deployment. Collaborating in a professional Oracle ecosystem with exposure to enterprise-scale projects and Oracle best practices.
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Oracle APEX</span>
+          <span class="exp-tag">PL/SQL</span>
+          <span class="exp-tag">SQL</span>
+          <span class="exp-tag">Oracle Database</span>
+          <span class="exp-tag">SQL Developer</span>
+          <span class="exp-tag">Interactive Reports</span>
+          <span class="exp-tag">Dynamic Actions</span>
+        </div>
+      </div>
+    </div>
+
+
+      <div class="exp-dot"></div>
+      <div>
+        <div class="exp-role">Forward Program Learner</div>
+        <div class="exp-company">McKinsey & Company</div>
+        <div class="exp-body">
+          Selected for McKinsey's global learning initiative focused on leadership, strategic problem-solving, and business analytics. Developed analytical thinking through real-world case studies and collaborated with a global cohort of learners.
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Strategic Thinking</span>
+          <span class="exp-tag">Business Analytics</span>
+          <span class="exp-tag">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Mar – Jun 2024</div>
+      <div class="exp-dot"></div>
+      <div>
+        <div class="exp-role">Web Developer Intern</div>
+        <div class="exp-company">Prodigy Info Technologies</div>
+        <div class="exp-body">
+          Developed and integrated RESTful APIs using Node.js and MongoDB. Achieved 98% code coverage and reduced post-release defects by 35% through rigorous testing and structured code review. Designed 3 user management APIs from scratch.
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Node.js</span>
+          <span class="exp-tag">MongoDB</span>
+          <span class="exp-tag">REST APIs</span>
+          <span class="exp-tag">98% Code Coverage</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">2021 – Present</div>
+      <div class="exp-dot"></div>
+      <div>
+        <div class="exp-role">Oracle APEX Developer (Self-directed)</div>
+        <div class="exp-company">Academic & Personal Projects</div>
+        <div class="exp-body">
+          Independently designed and developed 3 Oracle APEX applications from the ground up — including schema design, PL/SQL business logic, APEX UI components, and end-user validation workflows. Built practical expertise in Interactive Reports, Interactive Grids, Dynamic Actions, Forms, and multi-page application architecture.
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Oracle APEX</span>
+          <span class="exp-tag">PL/SQL</span>
+          <span class="exp-tag">SQL</span>
+          <span class="exp-tag">SQL Developer</span>
+          <span class="exp-tag">Oracle Database</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label">Contact</div>
+    <h2>Let's Work Together</h2>
+  </div>
+  <div class="contact-wrapper reveal">
+    <div class="contact-info">
+      <p>I'm currently working as an <strong>Oracle APEX Developer at Path Infotech</strong> (an Oracle Partner firm) and open to exciting opportunities, collaborations, or challenging APEX projects. Let's connect.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:ayushmishra028@outlook.com">
+          <div class="cl-icon" style="background:rgba(232,160,32,0.1)">📧</div>
+          <div>
+            <div class="cl-text-main">Email Me</div>
+            <div class="cl-text-sub">ayushmishra028@outlook.com</div>
+          </div>
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/in/-ayushmishra-x/" target="_blank">
+          <div class="cl-icon" style="background:rgba(26,111,165,0.1)">💼</div>
+          <div>
+            <div class="cl-text-main">LinkedIn</div>
+            <div class="cl-text-sub">linkedin.com/in/-ayushmishra-x</div>
+          </div>
+        </a>
+        <a class="contact-link" href="https://github.com/iyushhhh" target="_blank">
+          <div class="cl-icon" style="background:rgba(255,255,255,0.05)">⌨️</div>
+          <div>
+            <div class="cl-text-main">GitHub</div>
+            <div class="cl-text-sub">github.com/iyushhhh</div>
+          </div>
+        </a>
+        <a class="contact-link" href="tel:+919654885207">
+          <div class="cl-icon" style="background:rgba(199,70,52,0.1)">📱</div>
+          <div>
+            <div class="cl-text-main">Call / WhatsApp</div>
+            <div class="cl-text-sub">+91 9654885207</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <form class="contact-form" action="https://formspree.io/f/mdapopgg" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <input type="text" name="subject" placeholder="Oracle APEX Role / Project Enquiry">
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea name="message" placeholder="Tell me about the role or project..."></textarea>
+      </div>
+      <input type="hidden" name="_next" value="https://iyushhhh.github.io/personal_portfolio/?sent=true">
+      <input type="hidden" name="_subject" value="New message from Portfolio – Ayush Mishra">
+      <input type="hidden" name="_replyto" value="ayushmishra028@outlook.com">
+      <button type="submit" class="btn-submit">Send Message →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2025 <strong>Ayush Mishra</strong> · Oracle APEX Developer & SQL Specialist</div>
+  <div style="color:var(--border);font-size:0.78rem">Oracle APEX · SQL · PL/SQL · Oracle Database</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => io.observe(r));
+
+  // Nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id'); });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+
+  // Smooth active nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('navLinks').classList.remove('open');
+      }
+    });
+  });
+</script>
+</body>
+</html>
